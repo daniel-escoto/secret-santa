@@ -29,8 +29,8 @@ export default function AddInvalidPair({
     if (
       invalidPairs.some((invalidPair) => {
         return (
-          invalidPair.participant1.email === participant1.email &&
-          invalidPair.participant2.email === participant2.email
+          invalidPair.participant1.name === participant1.name &&
+          invalidPair.participant2.name === participant2.name
         );
       })
     ) {
@@ -42,8 +42,8 @@ export default function AddInvalidPair({
     if (
       invalidPairs.some((invalidPair) => {
         return (
-          invalidPair.participant1.email === participant2.email &&
-          invalidPair.participant2.email === participant1.email
+          invalidPair.participant1.name === participant2.name &&
+          invalidPair.participant2.name === participant1.name
         );
       })
     ) {
@@ -52,7 +52,7 @@ export default function AddInvalidPair({
     }
 
     // check if the pair is the same person
-    if (participant1.email === participant2.email) {
+    if (participant1.name === participant2.name) {
       alert("You cannot add a pair with the same person");
       return;
     }
@@ -70,11 +70,11 @@ export default function AddInvalidPair({
           <select
             id="participant1"
             name="participant1"
-            value={participant1?.email || ""}
+            value={participant1?.name || ""}
             onChange={(e) => {
               setParticipant1(
                 participants.find(
-                  (participant) => participant.email === e.target.value
+                  (participant) => participant.name === e.target.value
                 ) || null
               );
             }}
@@ -82,7 +82,7 @@ export default function AddInvalidPair({
           >
             <option value="">Select Participant 1</option>
             {participants.map((participant) => (
-              <option key={participant.email} value={participant.email}>
+              <option key={participant.name} value={participant.name}>
                 {participant.name}
               </option>
             ))}
@@ -93,11 +93,11 @@ export default function AddInvalidPair({
           <select
             id="participant2"
             name="participant2"
-            value={participant2?.email || ""}
+            value={participant2?.name || ""}
             onChange={(e) => {
               setParticipant2(
                 participants.find(
-                  (participant) => participant.email === e.target.value
+                  (participant) => participant.name === e.target.value
                 ) || null
               );
             }}
@@ -105,7 +105,7 @@ export default function AddInvalidPair({
           >
             <option value="">Select Participant 2</option>
             {participants.map((participant) => (
-              <option key={participant.email} value={participant.email}>
+              <option key={participant.name} value={participant.name}>
                 {participant.name}
               </option>
             ))}
@@ -116,7 +116,7 @@ export default function AddInvalidPair({
       <div>
         <button
           type="button"
-          className="group relative w-full flex justify-center py-2 px-4 border border-transparent text-sm font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
+          className="group relative w-full flex justify-center py-2 px-4 border border-transparent text-sm font-medium rounded-md text-white bg-green-600 hover:bg-green-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-green-500"
           onClick={addInvalidPair}
         >
           Add Invalid Pair

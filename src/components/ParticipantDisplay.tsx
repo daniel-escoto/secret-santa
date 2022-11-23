@@ -10,7 +10,7 @@ export default function ParticipantDisplay({
   deleteParticipant,
 }: Props) {
   return (
-    <li key={participant.email}>
+    <li key={participant.name}>
       <div className="block hover:bg-gray-50">
         <div className="flex items-center px-4 py-4 sm:px-6">
           <div className="min-w-0 flex-1 flex items-center justify-between">
@@ -21,13 +21,7 @@ export default function ParticipantDisplay({
                 </div>
               </div>
             </div>
-            <div className="min-w-0 flex-1 px-4">
-              <div>
-                <div className="text-sm font-medium text-gray-600 truncate">
-                  {participant.email}
-                </div>
-              </div>
-            </div>
+
             <div className="ml-4 flex-shrink-0">
               <button
                 type="button"

@@ -18,8 +18,8 @@ export default function InvalidPairs({
       invalidPairs.filter((invalidPair) => {
         return participants.some((participant) => {
           return (
-            participant.email === invalidPair.participant1.email ||
-            participant.email === invalidPair.participant2.email
+            participant.name === invalidPair.participant1.name ||
+            participant.name === invalidPair.participant2.name
           );
         });
       })
@@ -38,15 +38,13 @@ export default function InvalidPairs({
       <ul className="divide-y divide-gray-200">
         {invalidPairs.map((invalidPair) => (
           <li
-            key={
-              invalidPair.participant1.email + invalidPair.participant2.email
-            }
+            key={invalidPair.participant1.name + invalidPair.participant2.name}
           >
             <div className="block hover:bg-gray-50">
               <div className="flex items-center px-4 py-4 sm:px-6">
                 <div className="min-w-0 flex-1 sm:flex sm:items-center sm:justify-between">
                   <div>
-                    <div className="text-sm font-medium text-rose-900 truncate">
+                    <div className="text-sm font-medium text-gray-600 truncate">
                       {invalidPair.participant1.name} cannot be paired with{" "}
                       {invalidPair.participant2.name}
                     </div>
@@ -59,10 +57,10 @@ export default function InvalidPairs({
                         setInvalidPairs(
                           invalidPairs.filter((invalidPair2) => {
                             return (
-                              invalidPair2.participant1.email !==
-                                invalidPair.participant1.email ||
-                              invalidPair2.participant2.email !==
-                                invalidPair.participant2.email
+                              invalidPair2.participant1.name !==
+                                invalidPair.participant1.name ||
+                              invalidPair2.participant2.name !==
+                                invalidPair.participant2.name
                             );
                           })
                         );
