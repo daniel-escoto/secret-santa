@@ -97,75 +97,76 @@ function App() {
   };
 
   return (
-    <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-      <div className="flex justify-center py-12 px-4 sm:px-6 lg:px-8">
-        <div className="max-w-lg w-full space-y-8">
-          <div>
-            <h2 className="mt-6 text-center text-3xl font-extrabold text-rose-900">
-              Secret Santa
-            </h2>
-          </div>
-
-          <AddParticipant addParticipant={addParticipant} />
-
-          <div className="mt-6">
-            {participants.length > 0 && (
-              <h2 className="mt-6 text-center text-2xl font-extrabold text-rose-900">
-                Participants
-              </h2>
-            )}
-            <ul className="divide-y divide-gray-200">
-              {participants.map((participant) => (
-                <ParticipantDisplay
-                  key={participant.name}
-                  participant={participant}
-                  deleteParticipant={() => {
-                    setParticipants(
-                      participants.filter((p) => p.name !== participant.name)
-                    );
-                  }}
-                />
-              ))}
-            </ul>
-          </div>
-
-          <AddInvalidPair
-            participants={participants}
-            invalidPairs={invalidPairs}
-            setInvalidPairs={setInvalidPairs}
-          />
-
-          <InvalidPairs
-            invalidPairs={invalidPairs}
-            setInvalidPairs={setInvalidPairs}
-            participants={participants}
-          />
-
-          {/* generate pairs button */}
-          {participants.length > 1 && (
+    <div className="dark:bg-gray-800 dark:text-white min-h-screen">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div className="flex justify-center py-12 px-4 sm:px-6 lg:px-8">
+          <div className="max-w-lg w-full space-y-8">
             <div>
-              <button
-                type="button"
-                className="group relative w-full flex justify-center py-2 px-4 border border-transparent text-sm font-medium rounded-md text-white bg-green-600 hover:bg-green-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-green-500"
-                onClick={generatePairs}
-              >
-                Generate Pairs
-              </button>
-            </div>
-          )}
-
-          {/* pairs */}
-          <div>
-            {pairs.length > 0 && (
-              <h2 className="mt-6 text-center text-2xl font-extrabold text-rose-900">
-                Pairs
+              <h2 className="mt-6 text-center text-3xl font-extrabold text-rose-900 dark:text-rose-100">
+                Secret Santa Generator
               </h2>
+            </div>
+
+            <AddParticipant addParticipant={addParticipant} />
+
+            <div className="mt-6">
+              {participants.length > 0 && (
+                <h2 className="mt-6 text-center text-2xl font-extrabold text-rose-900 dark:text-rose-100">
+                  Participants
+                </h2>
+              )}
+              <ul className="divide-y divide-gray-200 dark:divide-gray-700">
+                {participants.map((participant) => (
+                  <ParticipantDisplay
+                    key={participant.name}
+                    participant={participant}
+                    deleteParticipant={() => {
+                      setParticipants(
+                        participants.filter((p) => p.name !== participant.name)
+                      );
+                    }}
+                  />
+                ))}
+              </ul>
+            </div>
+
+            <AddInvalidPair
+              participants={participants}
+              invalidPairs={invalidPairs}
+              setInvalidPairs={setInvalidPairs}
+            />
+
+            <InvalidPairs
+              invalidPairs={invalidPairs}
+              setInvalidPairs={setInvalidPairs}
+              participants={participants}
+            />
+
+            {participants.length > 1 && (
+              <div>
+                <button
+                  type="button"
+                  className="group relative w-full flex justify-center py-2 px-4 border border-transparent text-sm font-medium rounded-md text-white bg-green-600 hover:bg-green-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-green-500 mt-4 dark:bg-green-700 dark:hover:bg-green-800"
+                  onClick={generatePairs}
+                >
+                  Generate Pairs
+                </button>
+              </div>
             )}
-            <ul className="divide-y divide-gray-200">
-              {pairs.map((pair) => (
-                <PairDisplay key={pair.giver.name} pair={pair} />
-              ))}
-            </ul>
+
+            {/* pairs */}
+            <div>
+              {pairs.length > 0 && (
+                <h2 className="mt-6 text-center text-2xl font-extrabold text-rose-900 dark:text-rose-100">
+                  Pairs
+                </h2>
+              )}
+              <ul className="divide-y divide-gray-200 dark:divide-gray-700">
+                {pairs.map((pair) => (
+                  <PairDisplay key={pair.giver.name} pair={pair} />
+                ))}
+              </ul>
+            </div>
           </div>
         </div>
       </div>

@@ -32,19 +32,19 @@ export default function InvalidPairs({
 
   return (
     <>
-      <h2 className="mt-6 text-center text-2xl font-extrabold text-rose-900">
+      <h2 className="mt-6 text-center text-2xl font-extrabold text-rose-900 dark:text-rose-100">
         Invalid Pairs
       </h2>
-      <ul className="divide-y divide-gray-200">
+      <ul className="divide-y divide-gray-200 dark:divide-gray-700">
         {invalidPairs.map((invalidPair) => (
           <li
             key={invalidPair.participant1.name + invalidPair.participant2.name}
           >
-            <div className="block hover:bg-gray-50">
+            <div className="block hover:bg-gray-50 dark:hover:bg-gray-800">
               <div className="flex items-center px-4 py-4 sm:px-6">
                 <div className="min-w-0 flex-1 sm:flex sm:items-center sm:justify-between">
                   <div>
-                    <div className="text-sm font-medium text-gray-600 truncate">
+                    <div className="text-sm font-medium text-gray-600 truncate dark:text-gray-300">
                       {invalidPair.participant1.name} cannot be paired with{" "}
                       {invalidPair.participant2.name}
                     </div>
@@ -52,7 +52,7 @@ export default function InvalidPairs({
                   <div className="mt-4 flex-shrink-0 sm:mt-0 sm:ml-5">
                     <button
                       type="button"
-                      className="inline-flex items-center px-4 py-2 border border-transparent text-sm font-medium rounded-md shadow-sm text-white bg-red-600 hover:bg-red-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
+                      className="inline-flex items-center px-4 py-2 border border-transparent text-sm font-medium rounded-md shadow-sm text-white bg-red-600 hover:bg-red-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 dark:bg-red-500 dark:hover:bg-red-600"
                       onClick={() => {
                         setInvalidPairs(
                           invalidPairs.filter((invalidPair2) => {
