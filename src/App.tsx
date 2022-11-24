@@ -157,15 +157,56 @@ function App() {
             {/* pairs */}
             <div>
               {pairs.length > 0 && (
-                <h2 className="mt-6 text-center text-2xl font-extrabold text-rose-900 dark:text-rose-100">
-                  Pairs
-                </h2>
+                <>
+                  <h2 className="mt-6 text-center text-2xl font-extrabold text-rose-900 dark:text-rose-100">
+                    Pairs
+                  </h2>
+                  {/* table header: giver, receiver */}
+                  <div className="mt-4 flex flex-col">
+                    <div className="-my-2 overflow-x-auto sm:-mx-6 lg:-mx-8">
+                      <div className="py-2 align-middle inline-block min-w-full sm:px-6 lg:px-8">
+                        <div className="shadow overflow-hidden border-b border-gray-200 sm:rounded-lg">
+                          <table className="min-w-full divide-y divide-gray-200 dark:divide-gray-700">
+                            <thead className="bg-gray-50 dark:bg-gray-700">
+                              <tr>
+                                <th
+                                  scope="col"
+                                  className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider"
+                                >
+                                  Giver
+                                </th>
+                                <th
+                                  scope="col"
+                                  className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider"
+                                >
+                                  Receiver
+                                </th>
+                              </tr>
+                            </thead>
+                            <tbody className="bg-white divide-y divide-gray-200 dark:bg-gray-800 dark:divide-gray-700">
+                              {pairs.map((pair) => (
+                                <tr key={pair.giver.name}>
+                                  <td className="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900 dark:text-gray-100">
+                                    {pair.giver.name}
+                                  </td>
+                                  <td className="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900 dark:text-gray-100">
+                                    {pair.receiver.name}
+                                  </td>
+                                </tr>
+                              ))}
+                            </tbody>
+                          </table>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </>
               )}
-              <ul className="divide-y divide-gray-200 dark:divide-gray-700">
+              {/* <ul className="divide-y divide-gray-200 dark:divide-gray-700">
                 {pairs.map((pair) => (
                   <PairDisplay key={pair.giver.name} pair={pair} />
                 ))}
-              </ul>
+              </ul> */}
             </div>
           </div>
         </div>
