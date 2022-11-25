@@ -58,6 +58,8 @@ export default function AddInvalidPair({
     }
 
     setInvalidPairs([...invalidPairs, { participant1, participant2 }]);
+    setParticipant1(null);
+    setParticipant2(null);
   };
 
   return (

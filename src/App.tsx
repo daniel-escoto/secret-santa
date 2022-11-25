@@ -4,7 +4,6 @@ import { Participant, InvalidPair, Pair } from "./Interfaces";
 import ParticipantDisplay from "./components/ParticipantDisplay";
 import InvalidPairs from "./components/InvalidPairs";
 import AddInvalidPair from "./components/AddInvalidPair";
-import PairDisplay from "./components/PairDisplay";
 
 function App() {
   const [participants, setParticipants] = useState<Participant[]>([]);
@@ -21,79 +20,38 @@ function App() {
   };
 
   const generatePairs = () => {
-    // every participant is a giver in one pair
-    // every participant is a receiver in one pair
+    const pairs: Pair[] = [];
+    const receiverList = [...participants];
 
-    const resPairs: Pair[] = [];
-
-    // create a copy of the participants array
-    const participantsCopy = [...participants];
-
-    // loop through the participants
-    for (let i = 0; i < participants.length; i++) {
-      // get a random index
-      const randomIndex = Math.floor(Math.random() * participantsCopy.length);
-
-      // get the random participant
-      const randomParticipant = participantsCopy[randomIndex];
-
-      // remove the random participant from the array
-      participantsCopy.splice(randomIndex, 1);
-
-      // create a pair
-      const pair: Pair = {
-        giver: participants[i],
-        receiver: randomParticipant,
-      };
-
-      // add the pair to the pairs array
-      resPairs.push(pair);
+    for (let i = receiverList.length - 1; i > 0; i--) {
+      const j = Math.floor(Math.random() * (i + 1));
+      [receiverList[i], receiverList[j]] = [receiverList[j], receiverList[i]];
     }
 
-    // check if any of the pairs are invalid
-    // a pair can be invalid if the giver is the receiver
-    // or if the pair is in the invalid pairs array
-    const invalidPairsFound = resPairs.some((pair) => {
-      // check if the giver is the receiver
-      if (pair.giver.name === pair.receiver.name) {
-        return true;
+    for (let giver of participants) {
+      const receiver = receiverList.find(
+        (r) =>
+          r.name !== giver?.name &&
+          !invalidPairs.find(
+            (p) =>
+              (r.name === p.participant1.name &&
+                giver?.name === p.participant2.name) ||
+              (r.name === p.participant2.name &&
+                giver?.name === p.participant1.name)
+          )
+      );
+
+      if (!receiver || !giver) {
+        alert("Cannot generate pairs");
+        return;
       }
 
-      // check if the pair is in the invalid pairs array
-      if (
-        invalidPairs.some((invalidPair) => {
-          return (
-            invalidPair.participant1.name === pair.giver.name &&
-            invalidPair.participant2.name === pair.receiver.name
-          );
-        })
-      ) {
-        return true;
-      }
+      receiverList.splice(receiverList.indexOf(receiver), 1);
 
-      // check if the reverse pair is in the invalid pairs array
-      if (
-        invalidPairs.some((invalidPair) => {
-          return (
-            invalidPair.participant1.name === pair.receiver.name &&
-            invalidPair.participant2.name === pair.giver.name
-          );
-        })
-      ) {
-        return true;
-      }
-
-      return false;
-    });
-
-    // if there are invalid pairs, generate new pairs
-    if (invalidPairsFound) {
-      generatePairs();
-      return;
+      pairs.push({ giver, receiver });
     }
 
-    // set the pairs
-    setPairs(resPairs);
+    setPairs(pairs);
   };
 
   return (
@@ -202,11 +160,6 @@ function App() {
                   </div>
                 </>
               )}
-              {/* <ul className="divide-y divide-gray-200 dark:divide-gray-700">
-                {pairs.map((pair) => (
-                  <PairDisplay key={pair.giver.name} pair={pair} />
-                ))}
-              </ul> */}
             </div>
           </div>
         </div>
